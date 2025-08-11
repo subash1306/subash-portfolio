@@ -1,31 +1,80 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-export default function Header({ activeSection, onNavClick }) {
-  const navItems = [
+const Header = ({ activeSection, onNavClick }) => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const links = [
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'About' },
     { id: 'skills', label: 'Skills' },
     { id: 'education', label: 'Education' },
-    { id: 'certifications', label: 'Certifications' }, // Included Certifications
+    { id: 'certifications', label: 'Certifications' },
     { id: 'experience', label: 'Experience' },
     { id: 'projects', label: 'Projects' },
     { id: 'contact', label: 'Contact' },
   ];
 
+  const handleLinkClick = (id) => {
+    onNavClick(id);
+    setIsMobileMenuOpen(false); // Close menu on mobile after click
+  };
+
   return (
-    <nav className="fixed top-0 w-full bg-white dark:bg-[#0f0f0f] shadow-md py-3 flex justify-center gap-8 z-50">
-      {navItems.map(({ id, label }) => (
+    <header className="header">
+      <div className="header-container">
+        <div className="logo">Subash J.</div>
+
+        {/* Desktop Navigation */}
+        <nav className="nav-desktop">
+          <ul className="nav-list">
+            {links.map(({ id, label }) => (
+              <li key={id}>
+                <button
+                  className={`nav-link ${
+                    activeSection === id ? 'active' : ''
+                  }`}
+                  onClick={() => handleLinkClick(id)}
+                  type="button"
+                >
+                  {label}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        {/* Mobile Hamburger Toggle */}
         <button
-          key={id}
-          onClick={() => onNavClick(id)}
-          className={`text-gray-800 dark:text-white hover:underline focus:outline-none ${
-            activeSection === id ? 'font-bold underline' : ''
-          }`}
-          aria-current={activeSection === id ? 'page' : undefined}
+          className="mobile-menu-toggle"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle navigation menu"
         >
-          {label}
+          <span className={`hamburger ${isMobileMenuOpen ? 'open' : ''}`} />
         </button>
-      ))}
-    </nav>
+      </div>
+
+      {/* Mobile Navigation */}
+      {isMobileMenuOpen && (
+        <nav className="nav-mobile">
+          <ul className="nav-list-mobile">
+            {links.map(({ id, label }) => (
+              <li key={id}>
+                <button
+                  className={`nav-link-mobile ${
+                    activeSection === id ? 'active' : ''
+                  }`}
+                  onClick={() => handleLinkClick(id)}
+                  type="button"
+                >
+                  {label}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
+    </header>
   );
-}
+};
+
+export default Header;
