@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.dark-mode-toggle-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+}
+
+
+
+body {
+  font-family: 'Inter', sans-serif;
+}
