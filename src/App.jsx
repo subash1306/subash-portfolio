@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './index.css';
 import DarkModeToggle from './components/DarkModeToggle';
 import { motion } from 'framer-motion';
-import Header from './components/Header'; // Make sure this is the updated Header.jsx I gave you
+import Header from './components/Header';
 
 function App() {
   const [activeSection, setActiveSection] = useState('home');
@@ -508,7 +508,7 @@ function App() {
           </p>
         </motion.section>
         <div className="dark-mode-toggle-wrapper">
-          <DarkModeToggle />
+          <DarkModeToggle/>
         </div>
       </div>
     </>
